@@ -64,8 +64,8 @@ const PokemonList = () => {
             ) : (
               <>
                 <img src={pokemon.imageUrl} alt={pokemon.name} />
-                <p className=" capitalize flex justify-center items-center gap-2">
-                  {pokemon.name}
+                <div className=" capitalize flex justify-center items-center gap-2">
+                  <p>{pokemon.name}</p>
                   <div className="flex justify-center items-center gap-3">
                     <button type="button" onClick={() => handleEdit(index)}>
                       <FiEdit3 />
@@ -74,7 +74,7 @@ const PokemonList = () => {
                       <RiDeleteBin4Fill className="text-red-600" />
                     </button>
                   </div>
-                </p>
+                </div>
               </>
             )}
           </li>
