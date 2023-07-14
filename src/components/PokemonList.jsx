@@ -18,6 +18,8 @@ const PokemonList = () => {
     }
   };
 
+  console.log(pokemons);
+
   const handleEdit = (index) => {
     const pokemon = pokemons[index];
     setEditingPokemonIndex(index);
