@@ -3,10 +3,12 @@ import Header from "../containers/Header";
 
 const Home = () => {
   return (
-    <div className="container mx-auto">
+    <>
       <Header />
-      <PokemonList />
-    </div>
+      <div className="container mx-auto pt-24">
+        <PokemonList />
+      </div>
+    </>
   );
 };
 
