@@ -2,8 +2,8 @@ import AddModal from "../components/AddModal";
 
 const Header = () => {
   return (
-    <div className="flex justify-between my-5">
-      <h1>Hunt A Pokemon!</h1>
+    <div className="flex justify-between px-7 py-4 bg-orange-100 fixed w-full">
+      <h1 className="font-bold text-4xl">Hunt A Pokemon!</h1>
       <AddModal />
     </div>
   );
