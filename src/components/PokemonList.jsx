@@ -1,9 +1,43 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
-  return <div>PokemonList</div>;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://pokeapi.co/api/v2/pokemon?limit=99"
+        );
+        setPokemons(response.data.results);
+      } catch (error) {
+        console.error("Error fetching Pokemon data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(pokemons);
+
+  return (
+    <div>
+      <ul className="grid grid-cols-5 gap-4 place-items-center">
+        {pokemons.map((pokemon, index) => (
+          <li key={index}>
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                index + 1
+              }.png`}
+              alt={pokemon.name}
+            />
+            <p className="text-center capitalize">{pokemon.name}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default PokemonList;
