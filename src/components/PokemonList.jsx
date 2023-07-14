@@ -1,39 +1,14 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { FiEdit3 } from "react-icons/fi";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { GiCancel } from "react-icons/gi";
+import { PokemonContext } from "../context/PokemonContext";
 
 const PokemonList = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const { pokemons, setPokemons } = useContext(PokemonContext);
   const [editedPokemonName, setEditedPokemonName] = useState("");
   const [editingPokemonIndex, setEditingPokemonIndex] = useState(-1);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=100"
-        );
-        const pokemons = response.data.results;
-        const updatedPokemons = await Promise.all(
-          pokemons.map(async (pokemon) => {
-            const res = await axios.get(pokemon.url);
-            return {
-              name: pokemon.name,
-              imageUrl: res.data.sprites.front_default,
-            };
-          })
-        );
-        setPokemons(updatedPokemons);
-      } catch (error) {
-        console.error("Error fetching Pokemon data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleDelete = (pokemon) => {
     if (window.confirm(`Are you sure you want to delete ${pokemon.name}?`)) {
