@@ -64,7 +64,7 @@ const PokemonList = () => {
 
   return (
     <div>
-      <ul className="grid grid-cols-5 gap-x-4 gap-y-9 place-items-center">
+      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-9 place-items-center">
         {pokemons.map((pokemon, index) => (
           <li key={index} className="flex flex-col justify-center items-center">
             {editingPokemonIndex === index ? (
