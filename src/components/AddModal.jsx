@@ -5,6 +5,7 @@ import axios from "axios";
 export default function Modal() {
   const [showModal, setShowModal] = useState(false);
   const [newPokemonName, setNewPokemonName] = useState("");
+  const [error, setError] = useState(null);
 
   const { setPokemons } = useContext(PokemonContext);
 
@@ -25,11 +26,12 @@ export default function Modal() {
             imageUrl: imageUrl,
           },
         ]);
+        setNewPokemonName("");
+        setShowModal(false);
       } catch (error) {
         console.log("Error fetching Pokemon data:", error);
+        setError("There is no such pokemon. Check the spelling and try again");
       }
-      setNewPokemonName("");
-      setShowModal(false);
     }
   };
 
@@ -82,6 +84,7 @@ export default function Modal() {
                     placeholder="Enter the name of your pokemon"
                     required
                   />
+                  {error && <small className="text-red-500">{error}</small>}
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
