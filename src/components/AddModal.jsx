@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { PokemonContext } from "../context/PokemonContext";
 
 export default function Modal() {
   const [showModal, setShowModal] = useState(false);
+  const [newPokemonName, setNewPokemonName] = useState("");
+
+  const { setPokemons } = useContext(PokemonContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (newPokemonName.trim() !== "") {
+      setPokemons((prevData) => [...prevData, { name: newPokemonName.trim() }]);
+      setNewPokemonName("");
+    }
     setShowModal(false);
+  };
+
+  const handleNameChange = (e) => {
+    setNewPokemonName(e.target.value);
   };
 
   return (
@@ -48,6 +60,8 @@ export default function Modal() {
                     type="text"
                     name="name"
                     id="name"
+                    value={newPokemonName}
+                    onChange={handleNameChange}
                     placeholder="Enter the name of your pokemon"
                     required
                   />
