@@ -30,7 +30,7 @@ export default function Modal() {
         setShowModal(false);
       } catch (error) {
         console.log("Error fetching Pokemon data:", error);
-        setError("There is no such pokemon. Check the spelling and try again");
+        setError("There is no such pokemon. Check the spelling and try again.");
       }
     }
   };
