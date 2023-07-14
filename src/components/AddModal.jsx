@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { PokemonContext } from "../context/PokemonContext";
+import axios from "axios";
 
 export default function Modal() {
   const [showModal, setShowModal] = useState(false);
@@ -7,13 +8,29 @@ export default function Modal() {
 
   const { setPokemons } = useContext(PokemonContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (newPokemonName.trim() !== "") {
-      setPokemons((prevData) => [...prevData, { name: newPokemonName.trim() }]);
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${newPokemonName
+            .trim()
+            .toLowerCase()}/`
+        );
+        const imageUrl = response?.data?.sprites?.front_default;
+        setPokemons((prevData) => [
+          ...prevData,
+          {
+            name: newPokemonName.trim().toLowerCase(),
+            imageUrl: imageUrl,
+          },
+        ]);
+      } catch (error) {
+        console.log("Error fetching Pokemon data:", error);
+      }
       setNewPokemonName("");
+      setShowModal(false);
     }
-    setShowModal(false);
   };
 
   const handleNameChange = (e) => {
