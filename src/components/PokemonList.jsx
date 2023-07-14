@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { FiEdit3 } from "react-icons/fi";
 
 const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -32,7 +33,12 @@ const PokemonList = () => {
               }.png`}
               alt={pokemon.name}
             />
-            <p className="text-center capitalize">{pokemon.name}</p>
+            <p className="text-center capitalize flex justify-center items-center gap-2">
+              {pokemon.name}
+              <button type="button">
+                <FiEdit3 />
+              </button>
+            </p>
           </li>
         ))}
       </ul>
